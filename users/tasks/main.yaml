@@ -4,5 +4,7 @@
   with_items: "{{ users_list }}"
 
 - name: Authorize access
-  authorized_key: "user={{ item.name }} key='{{ lookup('file', item.authorized) }}'"
-  with_items: "{{ users_list }}"
+  authorized_key: "user={{ item.0.name }} key='{{ lookup('file', item.1) }}'"
+  with_subelements:
+    - users_list
+    - authorized
