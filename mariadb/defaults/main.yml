@@ -2,3 +2,15 @@
 mariadb_version:       10.0
 mariadb_datadir:       /var/lib/mysql
 mariadb_root_password: root
+
+#
+# Users
+#
+
+mariadb_users: []
+
+#mariadb_users:
+#  - name: remote
+#    host: 176.106.173.20
+#    priv: *.*:ALL
+#    pass: JaDrLtr8AR7b=v

@@ -1,4 +1,6 @@
 ---
+# Reference: https://github.com/geerlingguy/ansible-role-mysql
+
 - name: Add repository
   apt_repository: "repo='deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/{{ mariadb_version }}/ubuntu trusty main' state=present"
 
@@ -25,3 +27,4 @@
   service: name=mysql state=started enabled=yes
 
 - include: secure.yml
+- include: users.yml

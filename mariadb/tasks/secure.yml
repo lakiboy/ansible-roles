@@ -1,3 +1,4 @@
+---
 - name: Retrieve hosts for the root user
   command: mysql -NBe 'SELECT host FROM mysql.user WHERE user = "root" ORDER BY (Host="localhost") ASC'
   register: mariadb_root_hosts

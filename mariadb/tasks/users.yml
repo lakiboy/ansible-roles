@@ -1,0 +1,9 @@
+---
+- name: Create users
+  with_items: mariadb_users
+  mysql_user:
+    state: present
+    name: "{{ item.name }}"
+    host: "{{ item.host | default('localhost') }}"
+    priv: "{{ item.priv | default('*.*:USAGE') }}"
+    password: "{{ item.pass | default('') }}"
