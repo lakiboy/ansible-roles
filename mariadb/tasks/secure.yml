@@ -1,0 +1,14 @@
+- name: Retrieve hosts for the root user
+  command: mysql -NBe 'SELECT host FROM mysql.user WHERE user = "root" ORDER BY (Host="localhost") ASC'
+  register: mariadb_root_hosts
+  changed_when: false
+
+- name: Update root password for hosts
+  mysql_user: "name=root host='{{ item }}' password='{{ mariadb_root_password }}'"
+  with_items: mariadb_root_hosts.stdout_lines
+
+- name: Copy .my.cnf with root credentials
+  template: src=root-my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
+
+- name: Remove test database
+  mysql_db: name=test state=absent

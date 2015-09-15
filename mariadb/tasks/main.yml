@@ -1,6 +1,6 @@
 ---
 - name: Add repository
-  apt_repository: repo='deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/10.0/ubuntu trusty main' state=present
+  apt_repository: "repo='deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/{{ mariadb_version }}/ubuntu trusty main' state=present"
 
 - name: Add repository key
   apt_key: keyserver=keyserver.ubuntu.com id=0xcbcb082a1bb943db
@@ -10,7 +10,10 @@
   register: mariadb_installed
 
 - name: Installation
-  apt: "pkg={{ mariadb_package }} state=present update_cache=yes"
+  apt: "pkg={{ item }} state=present update_cache=yes"
+  with_items:
+    - mariadb-server
+    - mariadb-client
 
 - name: Installation of Python libraries
   apt: name=python-mysqldb state=present
@@ -19,4 +22,6 @@
   when: mariadb_installed.stat.exists == false
 
 - name: Start on boot
-  service: name=mysql enabled=yes
+  service: name=mysql state=started enabled=yes
+
+- include: secure.yml
