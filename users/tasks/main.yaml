@@ -1,6 +1,6 @@
 ---
 - name: Creating users
-  user: "name={{ item.name }} state=present"
+  user: "name={{ item.name }} state=present shell=/bin/bash"
   with_items: "{{ users_list }}"
 
 - name: Authorize access
