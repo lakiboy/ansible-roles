@@ -1,0 +1,42 @@
+user             {{ nginx_user }};
+worker_processes {{ nginx_worker_processes }};
+pid              /run/nginx.pid;
+
+events {
+    worker_connections {{ nginx_worker_connections }};
+    multi_accept       on;
+}
+
+http {
+
+    log_format   main   '$remote_addr - $remote_user [$time_local] "$request" '
+                        '$status $body_bytes_sent "$http_referer" '
+                        '"$http_user_agent" "$http_x_forwarded_for"';
+
+    # Basic
+    sendfile            on;
+    tcp_nopush          on;
+    tcp_nodelay         on;
+    server_tokens       off;
+    keepalive_timeout   65;
+    types_hash_max_size 2048;
+    include             /etc/nginx/mime.types;
+    default_type        application/octet-stream;
+
+    # Logging
+    access_log {{ nginx_log_access }};
+    error_log  {{ nginx_log_error }};
+
+    # Gzip
+    gzip         on;
+    gzip_disable "msie6";
+
+    # Proxy
+    proxy_buffer_size       128k;
+    proxy_buffers           4 256k;
+    proxy_busy_buffers_size 256k;
+
+    # Servers
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+}

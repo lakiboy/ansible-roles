@@ -1,0 +1,19 @@
+---
+- name: Installation
+  apt: pkg=nginx state=present update_cache=yes cache_valid_time=86400
+
+- name: Start on boot
+  service: name=nginx state=started enabled=yes
+
+- name: Place nginx config
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf owner=root mode=0644
+  notify: Restart nginx
+
+- name: Remove default host
+  file: "path={{ item }} state=absent"
+  with_items:
+    - /etc/nginx/sites-available/default
+    - /etc/nginx/sites-enabled/default
+  notify: Restart nginx
+
+- include: servers-symfony.yml

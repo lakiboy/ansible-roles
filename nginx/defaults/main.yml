@@ -1,0 +1,19 @@
+---
+nginx_user:               www-data
+nginx_worker_processes:   4
+nginx_worker_connections: 1024
+nginx_log_error:          /var/log/nginx/error.log warn
+nginx_log_access:         /var/log/nginx/access.log main
+
+#
+# Symfony servers
+#
+
+nginx_servers_symfony: []
+
+#nginx_servers_symfony:
+#  - file: app
+#    port: 80
+#    name: app.dev
+#    path: /var/www/app/web
+#    pass: unix:/var/run/php5-fpm.sock
