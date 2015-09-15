@@ -1,7 +1,5 @@
 - name: Stop service after install
   service: name=mysql state=stopped
-  when: mariadb_installed.stat.exists == false
 
 - name: Delete innodb log files after initial install
   shell: "rm -f {{ mariadb_datadir }}/ib_logfile[01]"
-  when: mariadb_installed.stat.exists == false
