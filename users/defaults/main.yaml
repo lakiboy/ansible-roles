@@ -1,0 +1,5 @@
+---
+users_list:
+  - name: deploy
+    authorized:
+      - ~/.ssh/id_rsa.pub

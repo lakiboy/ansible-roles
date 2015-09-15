@@ -1,0 +1,11 @@
+---
+- name: Installation
+  apt: pkg={{ item }} state=present update_cache=yes
+  with_items: "{{ php_packages }}"
+
+- name: Place common config
+  template: src=php.ini.j2 dest=/etc/php5/{{ item }}/php.ini
+  with_items:
+    - cli
+    - fpm
+  notify: Restart php-fpm
