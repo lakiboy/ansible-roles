@@ -11,7 +11,7 @@
     group: "{{ item.user }}"
   with_items: devtools_github_user_tokens
 
-- name: Setting composer auth
+- name: Setting composer auth token
   template:
     src: composer-auth.json.j2
     dest: "~{{ item.user }}/.composer/auth.json"
