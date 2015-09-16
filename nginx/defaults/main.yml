@@ -20,3 +20,4 @@ nginx_servers_symfony: []
 #    pass: unix:/var/run/php5-fpm.sock
 #    owner: deploy
 #    group: deploy
+#    aliases: []

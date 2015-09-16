@@ -22,3 +22,11 @@ server {
         deny all;
     }
 }
+{% for alias in item.aliases %}
+
+server {
+    listen      {{ item.port | default(80) }};
+    server_name {{ alias }};
+    return      301 http://{{ item.host }}$request_uri;
+}
+{% endfor %}
