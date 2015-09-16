@@ -1,7 +1,7 @@
 ---
 - name: Creating users
   user: "name={{ item.name }} state=present shell=/bin/bash"
-  with_items: "{{ users_list }}"
+  with_items: users_list
 
 - name: Authorize access
   authorized_key: "user={{ item.0.name }} key='{{ lookup('file', item.1) }}'"

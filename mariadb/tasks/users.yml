@@ -6,4 +6,4 @@
     name: "{{ item.name }}"
     host: "{{ item.host | default('localhost') }}"
     priv: "{{ item.priv | default('*.*:USAGE') }}"
-    password: "{{ item.pass | default('') }}"
+    password: "{{ item.pass }}"
