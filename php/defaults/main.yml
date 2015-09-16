@@ -13,5 +13,6 @@ php_packages:
 # PHP settings
 #
 
-php_memory_limit: 256M
-php_default_tz:   Europe/Riga
+php_memory_limit:      256M
+php_default_tz:        Europe/Riga
+php_session_save_path: /tmp
