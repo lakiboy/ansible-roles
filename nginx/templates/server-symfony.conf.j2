@@ -1,7 +1,7 @@
 server {
     listen      {{ item.port | default(80) }};
     server_name {{ item.host }};
-    root        {{ item.path }};
+    root        {{ item.path }}{{ item.target }};
 
     location / {
         try_files $uri /app.php$is_args$args;

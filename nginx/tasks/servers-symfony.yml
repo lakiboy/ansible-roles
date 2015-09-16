@@ -3,6 +3,13 @@
   file: "path={{ item.path }} state=directory mode=0755 owner={{ item.owner }} group={{ item.group }}"
   with_items: nginx_servers_symfony
 
+- name: Create target location for Symfony application
+  file: "path='{{ item.path }}{{ item.target }}' state=directory"
+  with_items: nginx_servers_symfony
+  when: item.target != ""
+  become: true
+  become_user: "{{ item.owner }}"
+
 - name: Place Symfony server config
   template: "src=server-symfony.conf.j2 dest=/etc/nginx/sites-available/{{ item.name }}"
   with_items: nginx_servers_symfony

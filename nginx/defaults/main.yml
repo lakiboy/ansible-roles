@@ -15,7 +15,8 @@ nginx_servers_symfony: []
 #  - name: app
 #    port: 80
 #    host: app.dev
-#    path: /var/www/app/web
+#    path: /var/www/app
+#    target: /web
 #    pass: unix:/var/run/php5-fpm.sock
 #    owner: deploy
 #    group: deploy

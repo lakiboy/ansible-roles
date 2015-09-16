@@ -1,0 +1,21 @@
+---
+- name: Installation
+  apt: "pkg={{ item }} state=present update_cache=yes cache_valid_time=86400"
+  with_items: devtools_packages
+
+- name: Create composer config dir
+  file:
+    state: directory
+    dest: "~{{ item.user }}/.composer"
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}"
+  with_items: devtools_github_user_tokens
+
+- name: Setting composer auth
+  template:
+    src: composer-auth.json.j2
+    dest: "~{{ item.user }}/.composer/auth.json"
+    owner: "{{ item.user }}"
+    group: "{{ item.user }}"
+    mode: 0600
+  with_items: devtools_github_user_tokens

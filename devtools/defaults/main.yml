@@ -1,0 +1,5 @@
+---
+devtools_github_user_tokens: [] # list of { user: foo, token: bar }
+devtools_packages:
+  - git
+  - default-jdk
