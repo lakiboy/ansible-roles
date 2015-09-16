@@ -10,3 +10,7 @@
     - cli
     - fpm
   notify: Restart php-fpm
+
+- name: Enable mcrypt module
+  shell: php5enmod mcrypt
+  when: "'php5-mcrypt' in php_packages"
