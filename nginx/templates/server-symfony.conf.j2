@@ -1,6 +1,6 @@
 server {
     listen      {{ item.port | default(80) }};
-    server_name {{ item.name }};
+    server_name {{ item.host }};
     root        {{ item.path }};
 
     location / {

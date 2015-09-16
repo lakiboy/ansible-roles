@@ -1,13 +1,14 @@
 ---
 - name: Create path for Symfony application
-  file: "path={{ item.path }} state=directory mode=0755"
+  file: "path={{ item.path }} state=directory mode=0755 owner={{ item.owner }} group={{ item.group }}"
   with_items: nginx_servers_symfony
 
 - name: Place Symfony server config
-  template: "src=server-symfony.conf.j2 dest=/etc/nginx/sites-available/{{ item.file }}"
+  template: "src=server-symfony.conf.j2 dest=/etc/nginx/sites-available/{{ item.name }}"
   with_items: nginx_servers_symfony
+  notify: Restart nginx
 
 - name: Enable Symfony server
-  file: "src=/etc/nginx/sites-available/{{ item.file }} dest=/etc/nginx/sites-enabled/{{ item.file }} state=link"
+  file: "src=/etc/nginx/sites-available/{{ item.name }} dest=/etc/nginx/sites-enabled/{{ item.name }} state=link"
   with_items: nginx_servers_symfony
   notify: Restart nginx

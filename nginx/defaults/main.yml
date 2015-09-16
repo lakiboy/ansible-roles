@@ -12,8 +12,10 @@ nginx_log_access:         /var/log/nginx/access.log main
 nginx_servers_symfony: []
 
 #nginx_servers_symfony:
-#  - file: app
+#  - name: app
 #    port: 80
-#    name: app.dev
+#    host: app.dev
 #    path: /var/www/app/web
 #    pass: unix:/var/run/php5-fpm.sock
+#    owner: deploy
+#    group: deploy

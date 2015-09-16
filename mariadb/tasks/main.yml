@@ -11,8 +11,12 @@
   stat: path=/etc/init.d/mysql
   register: mariadb_installed
 
+- name: Update apt cache
+  apt: update_cache=yes
+  when: mariadb_installed.stat.exists == false
+
 - name: Installation
-  apt: "pkg={{ item }} state=present update_cache=yes cache_valid_time=86400"
+  apt: "pkg={{ item }} state=present"
   with_items:
     - mariadb-server
     - mariadb-client
