@@ -1,6 +1,6 @@
 # Ansible roles
 
-Basic _Ansible_ roles to setup LEMP stack on Ubuntu.
+Basic _Ansible_ Ubuntu LEMP roles for Symfony application.
 
 ## Usage
 
