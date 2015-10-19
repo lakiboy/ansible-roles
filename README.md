@@ -1,6 +1,6 @@
 # Ansible roles
 
-Basic ansible roles to setup LEMP stack on Ubuntu.
+Basic _Ansible_ roles to setup LEMP stack on Ubuntu.
 
 ## Usage
 
@@ -16,11 +16,11 @@ _site.yml_:
       hostname: "name={{ hostname }}"
 
   roles:
-    - users
-    - mariadb
-    - php
-    - nginx
-    - devtools
+    - devmachine.users
+    - devmachine.mariadb
+    - devmachine.php
+    - devmachine.nginx
+    - devmachine.devtools
 ```
 
 _hosts_:
