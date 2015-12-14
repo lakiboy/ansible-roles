@@ -1,4 +1,8 @@
 ---
+
+- name: Add PHP 5.6 repository
+  apt_repository: repo='ppa:ondrej/php5-5.6'
+
 - name: Installation
   apt: "pkg={{ item }} state=present update_cache=yes cache_valid_time=86400"
   with_items: php_packages
@@ -11,7 +15,7 @@
     - fpm
   notify: Restart php-fpm
 
-- name: Enable mcrypt module
-  shell: php5enmod mcrypt
-  when: "'php5-mcrypt' in php_packages"
-  changed_when: false
+#- name: Enable mcrypt module
+#  shell: php5enmod mcrypt
+#  when: "'php5-mcrypt' in php_packages"
+#  changed_when: false

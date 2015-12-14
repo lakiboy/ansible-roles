@@ -24,7 +24,7 @@ server {
         deny all;
     }
 }
-{% for alias in item.aliases %}
+{% for alias in item.aliases | default([]) %}
 
 server {
     listen      {{ item.port | default(80) }};
