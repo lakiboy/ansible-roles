@@ -1,0 +1,6 @@
+---
+- name: Installation
+  apt: pkg=redis-server state=present update_cache=yes cache_valid_time=86400
+
+- name: Start on boot
+  service: name=redis-server state=started enabled=yes
