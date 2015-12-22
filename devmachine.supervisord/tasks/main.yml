@@ -1,0 +1,11 @@
+---
+- name: Installation
+  apt: pkg=supervisor state=present update_cache=yes cache_valid_time=86400
+
+- name: Start on boot
+  service: name=supervisor state=started enabled=yes
+
+- name: Place configuration files
+  copy: "src={{ item }} dest=/etc/supervisor/conf.d/{{ item | basename }}"
+  with_items: supervisord_conf_files
+  notify: Restart supervisor
