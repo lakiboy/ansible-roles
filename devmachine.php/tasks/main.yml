@@ -9,13 +9,8 @@
   notify: Restart php-fpm
 
 - name: Place common config
-  template: src=php.ini.j2 dest=/etc/php5/{{ item }}/php.ini
+  copy: "src={{ php_ini_file }} dest=/etc/php5/{{ item }}/php.ini"
   with_items:
     - cli
     - fpm
   notify: Restart php-fpm
-
-#- name: Enable mcrypt module
-#  shell: php5enmod mcrypt
-#  when: "'php5-mcrypt' in php_packages"
-#  changed_when: false
