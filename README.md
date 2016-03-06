@@ -33,7 +33,7 @@ app.com hostname=app
 _host_vars/app.com.yml_:
 ```yaml
 ---
-nginx_servers_symfony:
+nginx_servers:
   - name:   app
     host:   www.app.com
     path:   /var/www/app
