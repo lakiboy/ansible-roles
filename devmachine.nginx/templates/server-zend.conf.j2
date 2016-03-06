@@ -1,0 +1,28 @@
+server {
+    listen      {{ item.port | default(80) }};
+    server_name {{ item.host }};
+    root        {{ item.path }}{{ item.target }};
+    index       index.html index.php;
+
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass  {{ item.pass | default('unix:/var/run/php5-fpm.sock') }};
+        include       fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+{% for alias in item.aliases | default([]) %}
+
+server {
+    listen      {{ item.port | default(80) }};
+    server_name {{ alias }};
+    return      301 http://{{ item.host }}$request_uri;
+}
+{% endfor %}

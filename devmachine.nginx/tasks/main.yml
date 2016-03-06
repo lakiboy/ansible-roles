@@ -16,4 +16,4 @@
     - /etc/nginx/sites-enabled/default
   notify: Restart nginx
 
-- include: servers-symfony.yml
+- include: servers.yml

@@ -6,12 +6,13 @@ nginx_log_error:          /var/log/nginx/error.log warn
 nginx_log_access:         /var/log/nginx/access.log main
 
 #
-# Symfony servers
+# Nginx servers
 #
 
-nginx_servers_symfony: []
+nginx_servers: []
+nginx_project_type: symfony
 
-#nginx_servers_symfony:
+#nginx_servers:
 #  - name: app
 #    port: 80
 #    host: app.dev

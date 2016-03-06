@@ -1,0 +1,22 @@
+---
+
+- name: "Create path for {{ nginx_project_type }} application"
+  file: "path={{ item.path }} state=directory mode=0755 owner={{ item.owner }} group={{ item.group }}"
+  with_items: nginx_servers
+
+- name: "Create target location for {{ nginx_project_type }} application"
+  file: "path='{{ item.path }}{{ item.target }}' state=directory"
+  with_items: nginx_servers
+  when: item.target != ""
+  become: true
+  become_user: "{{ item.owner }}"
+
+- name: "Place {{ nginx_project_type }} server config"
+  template: "src='server-{{ nginx_project_type }}.conf.j2' dest=/etc/nginx/sites-available/{{ item.name }}"
+  with_items: nginx_servers
+  notify: Restart nginx
+
+- name: "Enable {{ nginx_project_type }} server"
+  file: "src=/etc/nginx/sites-available/{{ item.name }} dest=/etc/nginx/sites-enabled/{{ item.name }} state=link"
+  with_items: nginx_servers
+  notify: Restart nginx
