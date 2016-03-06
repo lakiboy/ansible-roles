@@ -11,6 +11,8 @@ php_packages:
 
 php_ini_file: php.ini
 
+php_user: www-data
+
 #
 # PHP settings
 #

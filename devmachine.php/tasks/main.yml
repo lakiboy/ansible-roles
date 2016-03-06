@@ -14,3 +14,7 @@
     - cli
     - fpm
   notify: Restart php-fpm
+
+- name: Place fpm config
+  template: src=php-fpm.conf.j2 dest=/etc/php5/fpm/pool.d/www.conf
+  notify: Restart php-fpm
