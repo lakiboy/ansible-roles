@@ -16,4 +16,7 @@
     - /etc/nginx/sites-enabled/default
   notify: Restart nginx
 
+- name: Prepare SSL directory
+  file: dest=/etc/nginx/ssl state=directory
+
 - include: servers.yml

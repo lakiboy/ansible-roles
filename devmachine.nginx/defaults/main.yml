@@ -1,4 +1,5 @@
 ---
+
 nginx_user:               www-data
 nginx_worker_processes:   4
 nginx_worker_connections: 1024
@@ -9,16 +10,19 @@ nginx_log_access:         /var/log/nginx/access.log main
 # Nginx servers
 #
 
-nginx_servers: []
 nginx_project_type: symfony
+nginx_servers:      []
 
 #nginx_servers:
-#  - name: app
-#    port: 80
-#    host: app.dev
-#    path: /var/www/app
-#    target: /web
-#    pass: unix:/var/run/php5-fpm.sock
-#    owner: deploy
-#    group: deploy
-#    aliases: []
+#  - name:              app
+#    port:              80
+#    host:              app.dev
+#    path:              /var/www/app
+#    target:            /web
+#    pass:              unix:/var/run/php5-fpm.sock
+#    owner:             deploy
+#    group:             deploy
+#    aliases:           []
+#    ssl:               false
+#    ssl_cert_path:     ~
+#    ssl_cert_key_path: ~

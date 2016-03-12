@@ -20,3 +20,15 @@
   file: "src=/etc/nginx/sites-available/{{ item.name }} dest=/etc/nginx/sites-enabled/{{ item.name }} state=link"
   with_items: nginx_servers
   notify: Restart nginx
+
+- name: Copy ssl certificates
+  copy: "src='{{ item.ssl_cert_path }}' dest=/etc/nginx/ssl/{{ item.host }}.crt"
+  with_items: nginx_servers
+  when: item.ssl | default(false)
+  notify: Restart nginx
+
+- name: Copy ssl key certificates
+  copy: "src='{{ item.ssl_cert_key_path }}' dest=/etc/nginx/ssl/{{ item.host }}.key"
+  with_items: nginx_servers
+  when: item.ssl | default(false)
+  notify: Restart nginx
