@@ -5,7 +5,8 @@
     state: present
     shell: /bin/bash
     generate_ssh_key: yes
-    group: "{{ item.group | default(item.name) }}"
+    group: "{{ item.primary_group | default(item.name) }}"
+    groups: "{{ item.groups | default('') }}"
   with_items: "{{ users_list }}"
 
 - name: Authorize access
