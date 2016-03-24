@@ -1,4 +1,9 @@
 ---
+
+- name: Creating groups
+  group: "name={{ item.primary_group | default(item.name) }}"
+  with_items: "{{ users_list }}"
+
 - name: Creating users
   user:
     name: "{{ item.name }}"
