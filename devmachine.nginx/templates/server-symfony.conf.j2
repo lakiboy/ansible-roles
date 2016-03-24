@@ -1,7 +1,12 @@
 server {
-    listen      {{ item.port | default(80) }};
+    listen      {{ item.port | default(80) }} {% if item.ssl | default(false) %}ssl{% endif %};
     server_name {{ item.host }};
     root        {{ item.path }}{{ item.target }};
+
+    {% if item.ssl | default(false) %}
+        ssl_certificate     /etc/nginx/ssl/{{ item.host }}.crt;
+        ssl_certificate_key /etc/nginx/ssl/{{ item.host }}.key;
+    {% endif %}
 
     location / {
         try_files $uri /app.php$is_args$args;
@@ -27,8 +32,8 @@ server {
 {% for alias in item.aliases | default([]) %}
 
 server {
-    listen      {{ item.port | default(80) }};
+    listen      80;
     server_name {{ alias }};
-    return      301 http://{{ item.host }}$request_uri;
+    return      301 http{% if item.ssl | default(false) %}s{% endif %}://{{ item.host }}$request_uri;
 }
 {% endfor %}
