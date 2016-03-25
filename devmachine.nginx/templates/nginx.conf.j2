@@ -29,7 +29,8 @@ http {
 
     # Gzip
     gzip         on;
-    gzip_disable "msie6";
+    gzip_static  on;
+    gzip_types   text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript;
 
     # Proxy
     proxy_buffer_size       128k;

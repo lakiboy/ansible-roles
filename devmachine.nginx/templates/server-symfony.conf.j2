@@ -28,6 +28,11 @@ server {
     location ~ /\.ht {
         deny all;
     }
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|swf|woff)$ {
+        expires       1y;
+        log_not_found off;
+    }
 }
 {% for alias in item.aliases | default([]) %}
 
