@@ -14,14 +14,15 @@ http {
                         '"$http_user_agent" "$http_x_forwarded_for"';
 
     # Basic
-    sendfile            on;
-    tcp_nopush          on;
-    tcp_nodelay         on;
-    server_tokens       off;
-    keepalive_timeout   65;
-    types_hash_max_size 2048;
-    include             /etc/nginx/mime.types;
-    default_type        application/octet-stream;
+    sendfile             on;
+    tcp_nopush           on;
+    tcp_nodelay          on;
+    server_tokens        off;
+    keepalive_timeout    65;
+    types_hash_max_size  2048;
+    include              /etc/nginx/mime.types;
+    default_type         application/octet-stream;
+    client_max_body_size 32m;
 
     # Logging
     access_log {{ nginx_log_access }};
