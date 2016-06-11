@@ -9,12 +9,12 @@
   notify: Restart php-fpm
 
 - name: Place common config
-  copy: "src={{ php_ini_file }} dest=/etc/php5/{{ item }}/php.ini"
+  copy: "src={{ php_ini_file }} dest={{ php_ini_dir }}/{{ item }}/php.ini"
   with_items:
     - cli
     - fpm
   notify: Restart php-fpm
 
 - name: Place fpm config
-  template: src=php-fpm.conf.j2 dest=/etc/php5/fpm/pool.d/www.conf
+  template: "src=php-fpm.conf.j2 dest={{ php_ini_dir }}/fpm/pool.d/www.conf"
   notify: Restart php-fpm

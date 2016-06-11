@@ -9,9 +9,10 @@ php_packages:
   - php5-intl
   - php5-imagick
 
+php_ini_dir:  /etc/php5
 php_ini_file: php.ini
-
-php_user: www-data
+php_service:  php5-fpm
+php_user:     www-data
 
 #
 # PHP settings
